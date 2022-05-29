@@ -2,7 +2,7 @@
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names,table}{xcolor}
 %
-\documentclass[american,paper=a4,captions=tableheading]{scrartcl}
+\documentclass[english,paper=a4,captions=tableheading]{scrartcl}
 \usepackage{microtype}
 \usepackage{ragged2e}
 \RaggedRight
@@ -10,12 +10,69 @@
 \usepackage{amsmath,amssymb}
 \usepackage[sfdefault,type1]{librefranklin}
 
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+
 \usepackage{xcolor}
 \definecolor{default-linkcolor}{HTML}{A50000}
 \definecolor{default-filecolor}{HTML}{A50000}
 \definecolor{default-citecolor}{HTML}{4077C0}
 \definecolor{default-urlcolor}{HTML}{4077C0}
 \definecolor{some-blue}{HTML}{0C2D82}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={THE MAIN TITLE},
+  pdfauthor={THE AUTHOR},
+  pdflang={en},
+  pdfsubject={Markdown},
+  pdfkeywords={Markdown, Trial},
+  hidelinks,
+  breaklinks=true,
+  pdfcreator={some pub pipe v2022.4.12}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[left=2cm,top=1cm,right=2cm,bottom=0.8cm,head=18.30666pt,includehead=true,includefoot=true,centering]{geometry}
+\usepackage{listings}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\usepackage{pagecolor}
+\usepackage{afterpage}
+\usepackage{tikz}
+\usepackage{setspace}
+
+\usepackage{graphicx}
+\usepackage{svg}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\definecolor{heading-color}{RGB}{40,40,40}
+\addtokomafont{section}{\color{heading-color}}
+% When using the classes report, scrreprt, book, scrbook or memoir, uncomment the following line.
+%\addtokomafont{chapter}{\color{heading-color}}
+
+\usepackage[headsepline,footsepline]{scrlayer-scrpage}
+
+\newpairofpagestyles{over-engineered-header-footer}{
+  \clearpairofpagestyles
+  \ihead*{LEFT HEAD TITLE}
+  \chead*{CENTER HEAD DATA}
+  \ohead*{\includesvg[height=0.5cm]{logo}}
+  \ifoot*{LEFT FOOT DATA}
+  \cfoot*{CENTER FOOT DATA}
+  \ofoot*{\thepage}
+  \addtokomafont{pageheadfoot}{\upshape}
+}
+\pagestyle{over-engineered-header-footer}
 
 \begin{document}
 
@@ -198,10 +255,10 @@ The facts conveyed are per the following diagram:
 \section{Acronyms}\label{acronyms}}
 
 \begin{small}
-\begin{longtable}[]{|
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}|
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.7500}}|}
-\hline
+  \begin{longtable}[]{|
+    >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}|
+    >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.7500}}|}
+  \hline
 \textbf{Term} & \textbf{Description} \\
 \hline
 API & Application Programming Interface \\
